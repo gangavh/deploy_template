@@ -1,0 +1,44 @@
+{
+  "containerDefinitions": [{
+        "name": "${APP_NAME}",
+        "image": "${DOCKER_REPO}/${IMAGE_NAME}:${BUILD_VERSION}",
+        "cpu": 512,
+        "memory": 512,
+        "essential": true,
+        "workingDirectory": "/opt/app",
+        "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+                "awslogs-group": "${APP_NAME}-${APP_ENV}",
+                "awslogs-region": "us-east-1"
+            }
+        },
+        "portMappings": [
+            {
+                "containerPort": ${APP_PORT}
+            }
+        ],
+        "environment": [
+            {
+                "name": "PORT",
+                "value": "${APP_PORT}"
+            },
+            {
+                "name": "NODE_ENV",
+                "value": "${APP_ENV}"
+            },
+            {
+                "name": "BUILD_VERSION",
+                "value": "${BUILD_VERSION}"
+            },
+            {
+                "name": "SYSTEM_NAME",
+                "value": "${SYSTEM_NAME}"
+            },
+            {
+                "name": "APP_NAME",
+                "value": "${APP_NAME}"
+            }
+        ]
+    }]
+}

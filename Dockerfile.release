@@ -1,0 +1,11 @@
+FROM node:4
+
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+
+COPY . /opt/app/
+
+# you will likely need to change these values
+EXPOSE 4050
+
+CMD [ "node", "server.js" ]
